@@ -36,7 +36,7 @@ func handlepanic() {
 
 func main() {
 	defer handlepanic()
-	err := cmd.App.Run(os.Args)
+	err := cmd.App.Run(os.Args) //这里去看cmd/root.go
 	if err != nil {
 		log.Fatal(err)
 	}
