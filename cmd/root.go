@@ -31,4 +31,4 @@ var App = &cli.App{
 		completionCommand,
 	},
 	EnableBashCompletion: true,
-}
+}   //使用上面提到的cli服务，生成命令。
