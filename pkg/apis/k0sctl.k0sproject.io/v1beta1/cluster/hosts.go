@@ -108,11 +108,11 @@ func (hosts Hosts) ParallelEach(filter ...func(h *Host) error) error {
 	ec := make(chan erritem, 1)
 
 	for _, f := range filter {
-		wg.Add(len(hosts))
+		wg.Add(len(hosts))  //将主机数量作为任务添加进去
 
 		for _, h := range hosts {
 			go func(h *Host) {
-				ec <- erritem{h.String(), f(h)}
+				ec <- erritem{h.String(), f(h)}  //每个主机执行参数中方法，将错误拼接起来
 			}(h)
 		}
 
