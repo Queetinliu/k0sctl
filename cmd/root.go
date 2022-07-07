@@ -14,8 +14,8 @@ var App = &cli.App{
 		redactFlag,
 	},
 	Commands: []*cli.Command{
-		versionCommand,
-		applyCommand,
+		versionCommand,  //见cmd/version.go，输出kubectl版本
+		applyCommand, //cmd/apply.go，apply命令
 		kubeconfigCommand,
 		initCommand,
 		resetCommand,
