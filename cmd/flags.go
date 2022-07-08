@@ -365,6 +365,7 @@ func displayLogo(_ *cli.Context) error {
 
 var upgradeChan = make(chan *github.Release)
 
+//从github或缓存文件获取最新版本
 func githubOrCachedRelease() (*github.Release, error) {
 	cached, err := xdg.SearchCacheFile("k0sctl.github.latest.json")  //这里引用了一个xdg实现，xdg按照约定定义了一些文件和目录
 	if err == nil {
@@ -382,7 +383,7 @@ func githubOrCachedRelease() (*github.Release, error) {
 		}
 	}
 	log.Tracef("starting online k0sctl upgrade check")
-	latest, err := github.LatestRelease(k0sctl.IsPre())
+	latest, err := github.LatestRelease(k0sctl.IsPre())   //k0sctl/integration/github/github.go这里面的方法，获取最新版本
 	if err != nil {
 		return nil, err
 	}
