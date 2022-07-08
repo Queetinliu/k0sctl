@@ -67,7 +67,7 @@ func (hosts Hosts) Find(filter func(h *Host) bool) *Host {
 }
 
 // Filter returns a filtered list of Hosts. The filter function should return true for hosts matching the criteria.
-func (hosts Hosts) Filter(filter func(h *Host) bool) Hosts {
+func (hosts Hosts) Filter(filter func(h *Host) bool) Hosts 
 	result := make(Hosts, 0, len(hosts))
 
 	for _, h := range hosts {
@@ -98,7 +98,7 @@ func (hosts Hosts) Workers() Hosts {
 
 // ParallelEach runs a function (or multiple functions chained) on every Host parallelly.
 // Any errors will be concatenated and returned.
-func (hosts Hosts) ParallelEach(filter ...func(h *Host) error) error {
+func (hosts Hosts) ParallelEach(filter ...func(h *Host) error) error {  //如注释所说，是并行地运行多个方法
 	var wg sync.WaitGroup
 	var errors []string
 	type erritem struct {
