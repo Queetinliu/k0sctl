@@ -70,13 +70,14 @@ func LatestRelease(preok bool) (Release, error) {
 		if v.PreRelease && !preok {  //如果是老版本继续请求
 			continue
 		}
+		//k0sversion又是一个库，得到一个新版本
 		if version, err := k0sversion.NewVersion(strings.TrimPrefix(v.TagName, "v")); err == nil {
 			versions = append(versions, version)
 		}
 	}
-	sort.Sort(versions)
+	sort.Sort(versions) //版本排序
 
-	latest := versions[len(versions)-1].String()
+	latest := versions[len(versions)-1].String()  //获取到最新版本
 
 	for _, v := range releases {
 		if strings.TrimPrefix(v.TagName, "v") == latest {
