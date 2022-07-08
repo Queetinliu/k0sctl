@@ -41,7 +41,8 @@ var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个
 		analyticsFlag,
 		upgradeCheckFlag,
 	},
-	Before: actions(initLogging, startCheckUpgrade, initConfig, displayLogo, initAnalytics, displayCopyright, warnOldCache), //这些都定义在cmd/flags.go，首先执行这些操作
+	Before: actions(initLogging, startCheckUpgrade, initConfig, displayLogo, initAnalytics, displayCopyright, warnOldCache), 
+	//initLogging定义在cmd/flags.go，startCheckUpgrade在下方。首先执行这些操作
 	After:  actions(reportCheckUpgrade, closeAnalytics),
 	Action: func(ctx *cli.Context) error {
 		start := time.Now()
