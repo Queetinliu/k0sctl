@@ -182,11 +182,11 @@ func closeAnalytics(_ *cli.Context) error {
 	return nil
 }
 
-// initLogging initializes the logger
+// initLogging initializes the logger   //这里引用了外部的log部件
 func initLogging(ctx *cli.Context) error {
 	log.SetLevel(log.TraceLevel)
-	log.SetOutput(io.Discard)
-	initScreenLogger(logLevelFromCtx(ctx, log.InfoLevel))
+	log.SetOutput(io.Discard)  
+	initScreenLogger(logLevelFromCtx(ctx, log.InfoLevel))  //方法见下面，设定一个log hook
 	exec.DisableRedact = ctx.Bool("no-redact")
 	rig.SetLogger(log.StandardLogger())
 	return initFileLogger()
