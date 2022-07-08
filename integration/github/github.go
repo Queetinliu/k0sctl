@@ -62,7 +62,7 @@ func LatestK0sVersion(preok bool) (string, error) {
 func LatestRelease(preok bool) (Release, error) {
 	var releases []Release
 	if err := unmarshalURLBody("https://api.github.com/repos/k0sproject/k0sctl/releases?per_page=20&page=1", &releases); err != nil {
-		return Release{}, err
+		return Release{}, err   //将http请求的版本存到releases，注意这里用的指针
 	}
 
 	var versions k0sversion.Collection
@@ -114,5 +114,5 @@ func unmarshalURLBody(url string, o interface{}) error {
 		return err
 	}
 
-	return json.Unmarshal(body, o)
+	return json.Unmarshal(body, o)  //返回解析的body数据并将其存到o
 }
