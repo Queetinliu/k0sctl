@@ -112,16 +112,16 @@ func initConfig(ctx *cli.Context) error {
 	log.Debugf("Loaded configuration:\n%s", subst)   //这里又用到了外部库
 
 	c := &v1beta1.Cluster{}
-	if err := yaml.UnmarshalStrict(subst, c); err != nil {
+	if err := yaml.UnmarshalStrict(subst, c); err != nil {   //解析配置给c
 		return err
 	}
 
-	m, err := yaml.Marshal(c)
+	m, err := yaml.Marshal(c) //序列化
 	if err == nil {
 		log.Tracef("unmarshaled configuration:\n%s", m)
 	}
 
-	if err := c.Validate(); err != nil {
+	if err := c.Validate(); err != nil {   //验证配置
 		return fmt.Errorf("configuration validation failed: %w", err)
 	}
 
