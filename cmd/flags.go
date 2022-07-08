@@ -88,7 +88,7 @@ func actions(funcs ...func(*cli.Context) error) func(*cli.Context) error {
 
 // initConfig takes the config flag, does some magic and replaces the value with the file contents
 func initConfig(ctx *cli.Context) error {
-	f := ctx.String("config")
+	f := ctx.String("config") //看看是否通过config设置了配置文件
 	if f == "" {
 		return nil
 	}
@@ -109,7 +109,7 @@ func initConfig(ctx *cli.Context) error {
 		return err
 	}
 
-	log.Debugf("Loaded configuration:\n%s", subst)
+	log.Debugf("Loaded configuration:\n%s", subst)   //这里又用到了外部库
 
 	c := &v1beta1.Cluster{}
 	if err := yaml.UnmarshalStrict(subst, c); err != nil {
