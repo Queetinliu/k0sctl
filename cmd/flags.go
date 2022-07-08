@@ -424,7 +424,7 @@ func startCheckUpgrade(ctx *cli.Context) error {
 			upgradeChan <- nil
 		}
 	}()
-
+//检查，结果发送到这个通道
 	return nil
 }
 
