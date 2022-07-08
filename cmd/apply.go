@@ -35,7 +35,7 @@ var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个
 			Usage:  "Skip downgrade check",
 			Hidden: true,
 		},
-		debugFlag,
+		debugFlag,   //这几个参数见cmd/flags.go的定义
 		traceFlag,
 		redactFlag,
 		analyticsFlag,
