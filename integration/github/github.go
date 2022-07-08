@@ -67,7 +67,7 @@ func LatestRelease(preok bool) (Release, error) {
 
 	var versions k0sversion.Collection
 	for _, v := range releases {
-		if v.PreRelease && !preok {
+		if v.PreRelease && !preok {  //如果是老版本继续请求
 			continue
 		}
 		if version, err := k0sversion.NewVersion(strings.TrimPrefix(v.TagName, "v")); err == nil {
