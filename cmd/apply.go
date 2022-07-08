@@ -12,13 +12,13 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var applyCommand = &cli.Command{
+var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个工具
 	Name:  "apply",
 	Usage: "Apply a k0sctl configuration",
 	Flags: []cli.Flag{
 		configFlag,
 		&cli.BoolFlag{
-			Name:  "no-wait",
+			Name:  "no-wait",   //flag名为no-wait   
 			Usage: "Do not wait for worker nodes to join",
 		},
 		&cli.BoolFlag{
