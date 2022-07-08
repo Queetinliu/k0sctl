@@ -366,11 +366,11 @@ func displayLogo(_ *cli.Context) error {
 var upgradeChan = make(chan *github.Release)
 
 func githubOrCachedRelease() (*github.Release, error) {
-	cached, err := xdg.SearchCacheFile("k0sctl.github.latest.json")
+	cached, err := xdg.SearchCacheFile("k0sctl.github.latest.json")  //这里引用了一个xdg实现，xdg按照约定定义了一些文件和目录
 	if err == nil {
 		log.Tracef("found a cached github response in %s", cached)
 		stat, err := os.Stat(cached)
-		if err == nil && time.Since(stat.ModTime()) < time.Hour {
+		if err == nil && time.Since(stat.ModTime()) < time.Hour {   //先搜索缓存文件，如果缓存文件存在且修改时间小于1小时，读取缓存文件返回版本地址
 			log.Tracef("cached github release is fresh enough")
 			if content, err := os.ReadFile(cached); err == nil {
 				release := &github.Release{}
