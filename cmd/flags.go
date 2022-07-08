@@ -189,7 +189,7 @@ func initLogging(ctx *cli.Context) error {
 	initScreenLogger(logLevelFromCtx(ctx, log.InfoLevel))  //方法见下面，设定一个log hook
 	exec.DisableRedact = ctx.Bool("no-redact")
 	rig.SetLogger(log.StandardLogger())
-	return initFileLogger()
+	return initFileLogger()   
 }
 
 // initSilentLogging initializes the logger in silent mode
@@ -203,7 +203,7 @@ func initSilentLogging(ctx *cli.Context) error {
 	return initFileLogger()
 }
 
-func logLevelFromCtx(ctx *cli.Context, defaultLevel log.Level) log.Level {
+func logLevelFromCtx(ctx *cli.Context, defaultLevel log.Level) log.Level {   //如果设置了trace或debug，则返回不同级别，否则返回设定级别
 	if ctx.Bool("trace") {
 		return log.TraceLevel
 	} else if ctx.Bool("debug") {
