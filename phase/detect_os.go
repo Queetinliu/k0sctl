@@ -12,7 +12,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 )
-
+//上面导入时初始化注册了支持的模块
 // DetectOS performs remote OS detection
 type DetectOS struct {
 	GenericPhase
