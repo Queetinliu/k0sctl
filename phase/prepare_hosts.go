@@ -28,7 +28,7 @@ type prepare interface {
 }
 
 func (p *PrepareHosts) prepareHost(h *cluster.Host) error {
-	if c, ok := h.Configurer.(prepare); ok {
+	if c, ok := h.Configurer.(prepare); ok {   //似乎这一步并没有，应该不会执行
 		if err := c.Prepare(h); err != nil {
 			return err
 		}
