@@ -27,7 +27,8 @@ var versionCommand = &cli.Command{
 			Usage: "When used in conjunction with --k0s, a pre release is accepted as the latest version",
 		},
 	},
-	Before: func(ctx *cli.Context) error {
+	Before: func(ctxmain.go *cli.Context) error {
+		//k0s和pre都是前面的bool flag
 		if ctx.Bool("k0s") {
 			v, err := github.LatestK0sVersion(ctx.Bool("pre"))
 			if err != nil {

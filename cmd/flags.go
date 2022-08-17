@@ -104,7 +104,7 @@ func initConfig(ctx *cli.Context) error {
 		return err
 	}
 
-	subst, err := envsubst.Bytes(content)
+	subst, err := envsubst.Bytes(content) //这里从读取内容生成环境变量
 	if err != nil {
 		return err
 	}
@@ -248,6 +248,7 @@ func LogFile() (io.Writer, error) {
 }
 
 func configReader(f string) (io.ReadCloser, error) {
+	//为-则从输入中读取配置
 	if f == "-" {
 		stat, err := os.Stdin.Stat()
 		if err != nil {
@@ -270,11 +271,11 @@ func configReader(f string) (io.ReadCloser, error) {
 			continue
 		}
 
-		fp, err := filepath.Abs(fn)
+		fp, err := filepath.Abs(fn)  //获取绝对路径
 		if err != nil {
 			return nil, err
 		}
-		file, err := os.Open(fp)
+		file, err := os.Open(fp)  //打开配置文件
 		if err != nil {
 			return nil, err
 		}
