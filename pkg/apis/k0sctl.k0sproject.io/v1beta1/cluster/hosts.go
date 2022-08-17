@@ -67,7 +67,7 @@ func (hosts Hosts) Find(filter func(h *Host) bool) *Host {
 }
 
 // Filter returns a filtered list of Hosts. The filter function should return true for hosts matching the criteria.
-func (hosts Hosts) Filter(filter func(h *Host) bool) Hosts 
+func (hosts Hosts) Filter(filter func(h *Host) bool) Hosts {
 	result := make(Hosts, 0, len(hosts))
 
 	for _, h := range hosts {

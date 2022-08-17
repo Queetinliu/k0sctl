@@ -478,7 +478,7 @@ func (h *Host) NeedCurl() bool {
 		return false
 	}
 
-	return !h.Configurer.CommandExist(h, "curl")
+	return !h.Configurer.CommandExist(h, "curl")  
 }
 
 // NeedIPTables returns true when the iptables package is needed on the host
