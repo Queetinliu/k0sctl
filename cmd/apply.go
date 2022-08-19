@@ -50,7 +50,7 @@ var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个
 
 		manager := phase.Manager{Config: ctx.Context.Value(ctxConfigKey{}).(*v1beta1.Cluster)}
 		lockPhase := &phase.Lock{}
-		//这里AddPhase就运行这些结构体里的Run()方法
+		//这里AddPhase就运行这些结构体里的Run()方法.这里添加结构体，然后在下面会运行这些结构体的方法
 		manager.AddPhase(
 			&phase.Connect{},
 			&phase.DetectOS{},

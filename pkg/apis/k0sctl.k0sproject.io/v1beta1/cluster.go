@@ -40,6 +40,7 @@ func (c *Cluster) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 // Validate performs a configuration sanity check
+//这里用了外部库进行校验
 func (c *Cluster) Validate() error {
 	validation.ErrorTag = "yaml"
 	return validation.ValidateStruct(c,

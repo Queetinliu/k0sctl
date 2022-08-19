@@ -125,7 +125,7 @@ func initConfig(ctx *cli.Context) error {
 		return fmt.Errorf("configuration validation failed: %w", err)
 	}
 
-	ctx.Context = context.WithValue(ctx.Context, ctxConfigKey{}, c)
+	ctx.Context = context.WithValue(ctx.Context, ctxConfigKey{}, c) //将解析到的配置给到context
 
 	return nil
 }
