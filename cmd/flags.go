@@ -182,12 +182,12 @@ func closeAnalytics(_ *cli.Context) error {
 	return nil
 }
 
-// initLogging initializes the logger   //这里引用了外部的log部件
+// initLogging initializes the logger   //这里引用了外部的log部件，实现了2个hook，一个将日志输出到屏幕，一个输出到文件
 func initLogging(ctx *cli.Context) error {
 	log.SetLevel(log.TraceLevel)
 	log.SetOutput(io.Discard)  
 	initScreenLogger(logLevelFromCtx(ctx, log.InfoLevel))  //方法见下面，设定一个log hook
-	exec.DisableRedact = ctx.Bool("no-redact")
+	exec.DisableRedact = ctx.Bool("no-redact") //获取这个值
 	rig.SetLogger(log.StandardLogger())
 	return initFileLogger()   
 }
@@ -203,7 +203,7 @@ func initSilentLogging(ctx *cli.Context) error {
 	return initFileLogger()
 }
 
-func logLevelFromCtx(ctx *cli.Context, defaultLevel log.Level) log.Level {   //如果设置了trace或debug，则返回不同级别，否则返回设定级别
+func logLevelFromCtx(ctx *cli.Context, defaultLevel log.Level) log.Level {   //如果设置了trace或debug，则返回不同级别，否则返回默认级别
 	if ctx.Bool("trace") {
 		return log.TraceLevel
 	} else if ctx.Bool("debug") {
@@ -213,7 +213,7 @@ func logLevelFromCtx(ctx *cli.Context, defaultLevel log.Level) log.Level {   //�
 	}
 }
 
-func initScreenLogger(lvl log.Level) {
+func initScreenLogger(lvl log.Level) {  //这里添加一个屏幕hook
 	log.AddHook(screenLoggerHook(lvl))
 }
 
@@ -316,7 +316,7 @@ func (h *loghook) Fire(entry *log.Entry) error {
 	return err
 }
 
-func screenLoggerHook(lvl log.Level) *loghook {
+func screenLoggerHook(lvl log.Level) *loghook { //这里设定输出到屏幕的hook
 	var forceColors bool
 	var writer io.Writer
 	if runtime.GOOS == "windows" {
