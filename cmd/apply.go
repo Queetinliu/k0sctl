@@ -48,7 +48,7 @@ var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个
 		start := time.Now()
 		phase.NoWait = ctx.Bool("no-wait")
 
-		manager := phase.Manager{Config: ctx.Context.Value(ctxConfigKey{}).(*v1beta1.Cluster)}
+		manager := phase.Manager{Config: ctx.Context.Value(ctxConfigKey{}).(*v1beta1.Cluster)}  //在这里得到之前获取到的值,context这样传递值比较便捷
 		lockPhase := &phase.Lock{}
 		//这里AddPhase就运行这些结构体里的Run()方法.这里添加结构体，然后在下面会运行这些结构体的方法
 		manager.AddPhase(
@@ -86,7 +86,8 @@ var applyCommand = &cli.Command{    //这里使用github.com/urfave/cli/v2这个
 
 		var result error
 
-		if result = manager.Run(); result != nil {
+		if result = manager.Run(); result != nil {  //这里读取manager配置然后顺序执行那些phase
+			//每个phase都是用了嵌入GenericPhase，嵌入GenericPhase包含prepare方法，将当前配置给到phase，因此每个phase都能读取到配置
 			analytics.Client.Publish("apply-failure", map[string]interface{}{"clusterID": manager.Config.Spec.K0s.Metadata.ClusterID})
 			if lf, err := LogFile(); err == nil {
 				if ln, ok := lf.(interface{ Name() string }); ok {

@@ -23,7 +23,7 @@ var retries = uint(60)
 
 // Run the phase
 func (p *Connect) Run() error {
-	return p.Config.Spec.Hosts.ParallelEach(func(h *cluster.Host) error {
+	return p.Config.Spec.Hosts.ParallelEach(func(h *cluster.Host) error { //这里已经传了配置的hosts，因此后面可以识别出来
 		err := retry.Do(
 			func() error {
 				return h.Connect()
